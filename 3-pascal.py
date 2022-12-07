@@ -2,12 +2,13 @@
 #  and prints the n first lines of a Pascal Triangle
 
 import math
+from functools import reduce
+
 
 def pascal(n):
     for i in range(n) :
         print(" ".join(str(x) for x in pascal_line(i)))
         
-
 
 def pascal_line(n):
     arr = []
@@ -16,16 +17,13 @@ def pascal_line(n):
     return arr
 
 
-
 def pascal_cell(i,j):
     return (
         math.floor(factorial(j)/ (factorial(i) * factorial(j -i)))
     )
 
-
 def factorial(n):
-    if(n < 2):
+    if n < 2:
         return 1
-    else:
-        return  n * factorial(n-1)
-
+    items = [x for x  in range(1,n+1)]
+    return reduce(lambda x,y: x * y, items)
